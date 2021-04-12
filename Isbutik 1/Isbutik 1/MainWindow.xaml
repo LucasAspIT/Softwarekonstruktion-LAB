@@ -1,0 +1,85 @@
+﻿<Window x:Class="Isbutik_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Isbutik_1"
+        mc:Ignorable="d"
+        
+        FontSize="20"
+        ResizeMode="NoResize"
+        Title="Isbutik" Height="600" Width="1000">
+    
+    <!-- "Container" border -->
+    <Border Padding="80 80">
+        <Grid>
+        
+        <!-- Defining grid properties -->
+        <Grid.ColumnDefinitions>
+            <!-- Divide the available width the specified amount of times (2) using asterisk (*) -->
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- ########## Box 1 start ########## -->
+                <StackPanel Grid.Column="0">
+                    <Label Content="Vælg is:" />
+
+                    <!-- Ice cream selection -->
+                    <ComboBox x:Name="cbxIceChoice" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged">
+                        <ComboBoxItem>Magnum</ComboBoxItem>
+                        <ComboBoxItem>Astronaut</ComboBoxItem>
+                        <ComboBoxItem>Lillebror</ComboBoxItem>
+                        <ComboBoxItem>Kung Fu</ComboBoxItem>
+                    </ComboBox>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0 0 0 20" Height="270" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt sodales augue a laoreet. Nulla consectetur pharetra justo ut finibus. Duis auctor, urna nec consequat imperdiet." />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="Pris kr.:" />
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="0,00" />
+
+                    </Grid>
+
+                </StackPanel>
+                <!-- ########## Box 1 end ########## -->
+
+                <!-- ########## Box 2 start ########## -->
+                <StackPanel VerticalAlignment="Center" Margin="50 20" Grid.Column="1">
+                    <Label Content="Vælg antal:" />
+                    <TextBox x:Name="tbxIceAmount" Margin="0 0 0 10" Text="0" TextChanged="tbxIceAmount_TextChanged"/>
+                    <Button x:Name="btnIceAdd" Content="Tilføj ->" Click="btnIceAdd_Click" />
+                </StackPanel>
+                <!-- ########## Box 2 end ########## -->
+                
+            </Grid>
+
+            <!-- ########## Box 3 start ########## -->
+            <StackPanel Grid.Column="1">
+                <Label Content="Bestillingsseddel" />
+                <DataGrid x:Name="dgOrderInfo" ItemsSource="{Binding OrderList}" AutoGenerateColumns="False" Height="325" >
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Navn" Binding="{Binding Name}" />
+                        <DataGridTextColumn Header="Mængde" Binding="{Binding Amount}" />
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+                <Button x:Name="btnOrder" Margin="300 5 0 0" Content="Bestil" Click="btnOrder_Click" />
+            </StackPanel>
+            <!-- ########## Box 3 end ########## -->
+        </Grid>
+    </Border>
+</Window>
