@@ -8,18 +8,19 @@
         
         FontSize="20"
         ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Title="Isbutik" Height="600" Width="1000">
-    
+
     <!-- "Container" border -->
     <Border Padding="80 80">
         <Grid>
-        
-        <!-- Defining grid properties -->
-        <Grid.ColumnDefinitions>
-            <!-- Divide the available width the specified amount of times (2) using asterisk (*) -->
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+
+            <!-- Defining grid properties -->
+            <Grid.ColumnDefinitions>
+                <!-- Divide the available width the specified amount of times (2) using asterisk (*) -->
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
             <Grid>
 
@@ -32,15 +33,21 @@
                 <StackPanel Grid.Column="0">
                     <Label Content="Vælg is:" />
 
-                    <!-- Ice cream selection -->
-                    <ComboBox x:Name="cbxIceChoice" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged">
-                        <ComboBoxItem>Magnum</ComboBoxItem>
+                    <ComboBox x:Name="cbxIceChoice" ItemsSource="{Binding ProductOverview}" SelectedValuePath="Content" DisplayMemberPath="Name" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged" >
+                    </ComboBox>
+                    
+                    
+                    <!--
+                    Ice cream selection
+                    <ComboBox x:Name="cbxIceChoice" SelectedValuePath="Content" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged">
+                        <ComboBoxItem IsSelected="True">Magnum</ComboBoxItem>
                         <ComboBoxItem>Astronaut</ComboBoxItem>
                         <ComboBoxItem>Lillebror</ComboBoxItem>
                         <ComboBoxItem>Kung Fu</ComboBoxItem>
                     </ComboBox>
+                    -->
 
-                    <TextBlock TextWrapping="Wrap" Margin="0 0 0 20" Height="270" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt sodales augue a laoreet. Nulla consectetur pharetra justo ut finibus. Duis auctor, urna nec consequat imperdiet." />
+                    <TextBlock x:Name="tbDescription" TextWrapping="Wrap" Margin="0 0 0 20" Height="270" />
 
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -49,7 +56,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Column="0" Content="Pris kr.:" />
-                        <TextBlock Grid.Column="1" VerticalAlignment="Center" Text="0,00" />
+                        <TextBlock x:Name="tbPrice" Grid.Column="1" VerticalAlignment="Center" Text="0,00" />
 
                     </Grid>
 
@@ -59,27 +66,38 @@
                 <!-- ########## Box 2 start ########## -->
                 <StackPanel VerticalAlignment="Center" Margin="50 20" Grid.Column="1">
                     <Label Content="Vælg antal:" />
-                    <TextBox x:Name="tbxIceAmount" Margin="0 0 0 10" Text="0" TextChanged="tbxIceAmount_TextChanged"/>
+                    <TextBox x:Name="tbxIceAmount" Margin="0 0 0 10" Text="1" />
                     <Button x:Name="btnIceAdd" Content="Tilføj ->" Click="btnIceAdd_Click" />
                 </StackPanel>
                 <!-- ########## Box 2 end ########## -->
-                
             </Grid>
 
             <!-- ########## Box 3 start ########## -->
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" VerticalAlignment="Top">
+
                 <Label Content="Bestillingsseddel" />
-                <DataGrid x:Name="dgOrderInfo" ItemsSource="{Binding OrderList}" AutoGenerateColumns="False" Height="325" >
+                <DataGrid x:Name="dgOrderInfo" ItemsSource="{Binding OrderList}" IsReadOnly="True" AutoGenerateColumns="False" Height="325" >
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Navn" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Mængde" Binding="{Binding Amount}" />
+                        <DataGridTextColumn Header="Antal" Binding="{Binding Amount}" />
                     </DataGrid.Columns>
-                    
+
                 </DataGrid>
-                <Button x:Name="btnOrder" Margin="300 5 0 0" Content="Bestil" Click="btnOrder_Click" />
+                <Grid Margin="0 5 0 0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button x:Name="btnRemove" Grid.Column="0" Margin="0 0 100 0" Content="Fjern" Click="btnRemove_Click"/>
+                    <Button x:Name="btnOrder" Grid.Column="1" Margin="100 0 0 0" Content="Bestil" Click="btnOrder_Click" />
+                </Grid>
+                
             </StackPanel>
             <!-- ########## Box 3 end ########## -->
+            
         </Grid>
     </Border>
 </Window>

@@ -13,3 +13,18 @@ C:\Users\luca609a\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug
 C:\Users\luca609a\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.csproj.CoreCompileInputs.cache
 C:\Users\luca609a\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.exe
 C:\Users\luca609a\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.pdb
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\bin\Debug\Isbutik 1.exe.config
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\bin\Debug\Isbutik 1.exe
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\bin\Debug\Isbutik 1.pdb
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.csprojAssemblyReference.cache
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\MainWindow.g.cs
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\App.g.cs
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1_MarkupCompile.cache
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1_MarkupCompile.lref
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\MainWindow.baml
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.g.resources
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik_1.Properties.Resources.resources
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.csproj.GenerateResource.cache
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.csproj.CoreCompileInputs.cache
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.exe
+C:\Users\Lucas\Desktop\Softwarekonstruktion-LAB\Isbutik 1\Isbutik 1\obj\Debug\Isbutik 1.pdb
