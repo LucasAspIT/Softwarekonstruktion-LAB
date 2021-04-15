@@ -28,6 +28,14 @@ namespace Isbutik_1 {
             ComboboxIceList();
         }
 
+        public double TotalPrice { get {
+               double totalPrice = 0;
+               foreach (var Order in OrderList) {
+                    totalPrice += Order.Price;
+                }
+               return totalPrice;
+             } }
+
         public Product ChosenProducts { get; set; }
 
         // Create a list that holds items from the "Order" class
@@ -40,7 +48,7 @@ namespace Isbutik_1 {
         /// Creates the products with their name, description and price.
         /// </summary>
         private void ComboboxIceList() {
-            ProductOverview.Add(new Product() { Name = "Magnum", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt sodales augue a laoreet. Nulla consectetur pharetra justo ut finibus. Duis auctor, urna nec consequat imperdiet.", UnitPrice = 11.5 });
+            ProductOverview.Add(new Product() { Name = "Magnum", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tincidunt sodales augue a laoreet. Nulla consectetur pharetra justo ut finibus. Duis auctor, urna nec consequat imperdiet.", UnitPrice = 11.50 });
             ProductOverview.Add(new Product() { Name = "Astronaut", Description = "Lorem ipsum curabitur massa ipsum, egestas sed orci eu, consequat pretium neque. Nullam eget tempor massa, sit amet faucibus enim. Integer accumsan metus ac ex sodales, sit amet dapibus.", UnitPrice = 9.50 });
             ProductOverview.Add(new Product() { Name = "Lillebror", Description = "Lorem ipsum aenean tincidunt mi mauris. Nullam elit nunc, luctus ac velit sit amet, imperdiet ornare nisi. Sed ut nulla nec mi imperdiet malesuada in elit vel pulvinar venenatis efficitur.", UnitPrice = 7.00 });
             ProductOverview.Add(new Product() { Name = "Kung Fu", Description = "Lorem ipsum orci id laoreet placerat, ligula leo hendrerit nisl, sit amet maximus nulla orci in libero non pellentesque erat, ut venenatis maecenas lobortis posuere dolor ut finibus gravida.", UnitPrice = 8.00 });
@@ -58,15 +66,25 @@ namespace Isbutik_1 {
         }
 
         /// <summary>
+        /// Updates the TotalPrice on the GUI and refreshes the DataGrid
+        /// </summary>
+        private void Refresh() {
+            tbTotalPrice.Text = TotalPrice.ToString();
+            dgOrderInfo.Items.Refresh();
+        }
+
+        /// <summary>
         /// When the button "btnIceAdd" is clicked, add a new "Order" to the "OrderList" that contains the name and the amount of the ice cream, then refresh the list.
         /// </summary>
         private void btnIceAdd_Click(object sender, RoutedEventArgs e) {
             try {
                 int selectedAmount = int.Parse(tbxIceAmount.Text);
 
+                // OrderList.Add(new Order() { Name = cbxIceChoice.SelectedItem.ToString(), Amount = selectedAmount });
+
                 if (selectedAmount > 0 && selectedAmount <= 255) {
-                    OrderList.Add(new Order() { Name = cbxIceChoice.SelectedValue.ToString(), Amount = selectedAmount });
-                    dgOrderInfo.Items.Refresh();
+                    OrderList.Add(new Order() { Product = ChosenProducts, Amount = selectedAmount });
+                    Refresh();
                 }
                 else if (selectedAmount <= 0) {
                     MessageBox.Show("Vælg venligst minimum 1 is.");
@@ -91,8 +109,14 @@ namespace Isbutik_1 {
         /// </summary>
         private void btnRemove_Click(object sender, RoutedEventArgs e) {
             try {
-            OrderList.RemoveAt(dgOrderInfo.SelectedIndex);
-            dgOrderInfo.Items.Refresh();
+                // If there currently is a selected item in the DataGrid OrderInfo (-1 means the selection is empty)
+                if (dgOrderInfo.SelectedIndex != -1) {
+                    MessageBoxResult result = MessageBox.Show("Er du sikker på at du vil fjerne den valgte is fra bestillingslisten?", "Fjern fra bestillingslisten", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes) {
+                        OrderList.RemoveAt(dgOrderInfo.SelectedIndex);
+                        Refresh();
+                    }
+                }
             }
             // If nothing is selected, and therefore the index is out of range
             catch (ArgumentOutOfRangeException) {
@@ -101,8 +125,9 @@ namespace Isbutik_1 {
         }
 
         private void btnOrder_Click(object sender, RoutedEventArgs e) {
-
+            if (OrderList.Count == 0) {
+                MessageBox.Show("Venligst vælg is og antal før du prøver at bestille.");
+            }
         }
-
     }
 }

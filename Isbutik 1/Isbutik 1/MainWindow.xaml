@@ -33,7 +33,7 @@
                 <StackPanel Grid.Column="0">
                     <Label Content="Vælg is:" />
 
-                    <ComboBox x:Name="cbxIceChoice" ItemsSource="{Binding ProductOverview}" SelectedValuePath="Content" DisplayMemberPath="Name" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged" >
+                    <ComboBox x:Name="cbxIceChoice" ItemsSource="{Binding ProductOverview}" SelectedValuePath="Content" DisplayMemberPath="Name" SelectedIndex="0" Margin="0 0 80 10" SelectionChanged="cbxIceChoice_SelectionChanged" >
                     </ComboBox>
                     
                     
@@ -81,6 +81,9 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Navn" Binding="{Binding Name}" />
                         <DataGridTextColumn Header="Antal" Binding="{Binding Amount}" />
+                        <DataGridTextColumn Header="Stykpris" Binding="{Binding UnitPrice}" />
+                        <DataGridTextColumn Header="TempPris" Binding="{Binding Price}" />
+                        <DataGridTextColumn Header="Beskrivelse" Binding="{Binding Description}" />
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -93,6 +96,7 @@
                     
                     <Button x:Name="btnRemove" Grid.Column="0" Margin="0 0 100 0" Content="Fjern" Click="btnRemove_Click"/>
                     <Button x:Name="btnOrder" Grid.Column="1" Margin="100 0 0 0" Content="Bestil" Click="btnOrder_Click" />
+                <TextBlock x:Name="tbTotalPrice" Grid.Column="1" Margin="0 0 120 0" >Unset</TextBlock>
                 </Grid>
                 
             </StackPanel>

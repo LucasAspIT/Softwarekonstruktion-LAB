@@ -11,8 +11,20 @@ namespace Isbutik_1 {
     /// </summary>
     public class Order {
 
-        public string Name { get; set; }
+        public Product Product { get; set; }
+        
+        public string Name { get { return Product.Name; } }
+
+        public string Description { get { return Product.Description; } }
+
+        public double UnitPrice { get { return Product.UnitPrice; } }
 
         public int Amount { get; set; }
+
+        public double Price { get {
+                return UnitPrice * Amount;
+            } }
+
+        
     }
 }
