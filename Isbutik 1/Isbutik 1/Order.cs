@@ -24,7 +24,5 @@ namespace Isbutik_1 {
         public double Price { get {
                 return UnitPrice * Amount;
             } }
-
-        
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace Isbutik_1 {
     /// <summary>
@@ -27,14 +28,6 @@ namespace Isbutik_1 {
             // Run the method with the product information
             ComboboxIceList();
         }
-
-        public double TotalPrice { get {
-               double totalPrice = 0;
-               foreach (var Order in OrderList) {
-                    totalPrice += Order.Price;
-                }
-               return totalPrice;
-             } }
 
         public Product ChosenProducts { get; set; }
 
@@ -66,21 +59,11 @@ namespace Isbutik_1 {
         }
 
         /// <summary>
-        /// Updates the TotalPrice on the GUI and refreshes the DataGrid
-        /// </summary>
-        private void Refresh() {
-            tbTotalPrice.Text = TotalPrice.ToString();
-            dgOrderInfo.Items.Refresh();
-        }
-
-        /// <summary>
         /// When the button "btnIceAdd" is clicked, add a new "Order" to the "OrderList" that contains the name and the amount of the ice cream, then refresh the list.
         /// </summary>
         private void btnIceAdd_Click(object sender, RoutedEventArgs e) {
             try {
                 int selectedAmount = int.Parse(tbxIceAmount.Text);
-
-                // OrderList.Add(new Order() { Name = cbxIceChoice.SelectedItem.ToString(), Amount = selectedAmount });
 
                 if (selectedAmount > 0 && selectedAmount <= 255) {
                     OrderList.Add(new Order() { Product = ChosenProducts, Amount = selectedAmount });
@@ -95,6 +78,8 @@ namespace Isbutik_1 {
                 else {
                     MessageBox.Show("Ukendt fejl.");
                 }
+
+                DataGridCheck();
             }
             catch (FormatException) {
                 MessageBox.Show("Indtast venligst et gyldigt nummer.");
@@ -115,6 +100,7 @@ namespace Isbutik_1 {
                     if (result == MessageBoxResult.Yes) {
                         OrderList.RemoveAt(dgOrderInfo.SelectedIndex);
                         Refresh();
+                        DataGridCheck();
                     }
                 }
             }
@@ -128,6 +114,65 @@ namespace Isbutik_1 {
             if (OrderList.Count == 0) {
                 MessageBox.Show("Venligst vælg is og antal før du prøver at bestille.");
             }
+        }
+
+
+        // Checks if it's an arabic numeral (0-9)
+        Regex tbxIsNumber = new Regex("^[0-9]+$");
+
+        /// <summary>
+        /// If it's a number in the textbox, make sure the background is white and the add button is enabled
+        /// <br>If the textbox is empty or there's anything other than a number, make the background red and disable the add button</br>
+        /// </summary>
+        private void tbxIceAmount_TextChanged(object sender, TextChangedEventArgs e) {
+            if (tbxIsNumber.IsMatch(tbxIceAmount.Text)) {
+                tbxIceAmount.Background = Brushes.White;
+
+                if (btnIceAdd != null) {
+                btnIceAdd.IsEnabled = true;
+                }
+            }
+            else {
+                tbxIceAmount.Background = Brushes.Red;
+                btnIceAdd.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Calculate the total price of the order list
+        /// </summary>
+        public double TotalPrice {
+            get {
+                double totalPrice = 0;
+                foreach (var Order in OrderList) {
+                    totalPrice += Order.Price;
+                }
+                return totalPrice;
+            }
+        }
+
+        /// <summary>
+        /// Enables the order and remove button if the grid is not empty
+        /// </summary>
+        private void DataGridCheck() {
+            if (dgOrderInfo.Items.Count >= 1) {
+                btnOrder.IsEnabled = true;
+                btnRemove.IsEnabled = true;
+            }
+            else {
+                btnOrder.IsEnabled = false;
+                btnRemove.IsEnabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Updates the TotalPrice on the GUI and refreshes the DataGrid
+        /// </summary>
+        private void Refresh() {
+            string formattedPrice = String.Format("{0:N2}", TotalPrice);
+            tbTotalPrice.Text = formattedPrice;
+            // tbTotalPrice.Text = TotalPrice.ToString();
+            dgOrderInfo.Items.Refresh();
         }
     }
 }
